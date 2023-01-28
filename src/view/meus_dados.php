@@ -49,24 +49,47 @@ require_once dirname(__DIR__, 2) . '/vendor/autoload.php';
                     <div class="card-body">
                         <div class="form-group">
                             <form action="meus_dados.php" method="post" id="formDados">
+                                <input type="hidden" id="id_end">
                                 <div class="form-group">
                                     <label>Nome</label>
                                     <input id="fuNome" name="fuNome" class="form-control obg" placeholder="Nome">
                                 </div>
                                 <div class="form-group">
-                                    <label>E-mail</label>
-                                    <input id="fuEmail" name="fuEmail" class="form-control obg" placeholder="E-mail">
+                                    <label>Nome empresa</label>
+                                    <input id="empresa" name="empresa" class="form-control obg" placeholder="Nome">
                                 </div>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label>E-mail</label>
+                                        <input id="fuEmail" name="fuEmail" class="form-control obg" placeholder="E-mail">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Telefone</label>
+                                        <input id="fuFone" name="fuFone" class="form-control obg" placeholder="Telefone">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                            <label>Cep</label>
+                                            <input id="cep" name="cep" class="form-control cep obg" onblur="BuscarCep()" placeholder="Cep">
+                                        </div>
+                                        <div class="form-group col-md-8">
+                                            <label>Rua</label>
+                                            <input id="rua" name="rua" class="form-control obg" placeholder="Rua">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label>Bairro</label>
+                                            <input id="bairro" name="bairro" class="form-control obg" placeholder="Bairro">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label>Cidade</label>
+                                            <input id="cidade" name="cidade" class="form-control obg" placeholder="Cidade">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label>Estado</label>
+                                            <input id="uf" name="uf" class="form-control obg" placeholder="Estado">
+                                        </div>
+                                    </div>    
                                 <div class="form-group">
-                                    <label>Telefone</label>
-                                    <input id="fuFone" name="fuFone" class="form-control obg" placeholder="Telefone">
-                                </div>
-                                <div class="form-group">
-                                    <label>Endereço</label>
-                                    <input id="fuEndereco" name="fuEndereco" class="form-control obg" placeholder="Endereço">
-                                </div>
-                                <div class="form-group">
-                                    <button onclick=" return NotificarCamposGenerico('formDados')" name="btnGravar" type="button" class="btn btn-block btn-primary col-md-4">Gravar</button>
+                                    <button onclick=" return AlterarMeusDados()" name="btnGravar" class="btn btn-block btn-primary col-md-4">Gravar</button>
                                 </div>
                             </form>
                         </div>
@@ -90,6 +113,8 @@ require_once dirname(__DIR__, 2) . '/vendor/autoload.php';
     <!-- ./wrapper -->
 
     <?php include_once PATH_URL . '/template/_includes/_script.php' ?>
+    <script src="../resource/ajax/tecnico-ajx.js"></script>
+    <script>CarregarMeusDados();</script>
 </body>
 
 </html>

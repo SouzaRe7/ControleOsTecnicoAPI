@@ -5,7 +5,7 @@ function RemoverLoad() {
     $("#divLoad").removeClass("overlay dark").html('');
 }
 function BASE_URL_AJAX(file_ajax) {
-    return "../resource/ajax/" + file_ajax + ".js";
+    return "http://localhost/ControlesOs1/src/resource/api/" + file_ajax + ".php";
 }
 function ChamarOutraPagina(pagina){
     window.location.replace(pagina + ".php");
