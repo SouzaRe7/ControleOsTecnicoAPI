@@ -35,12 +35,12 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
-            <li class="nav-item">
+            <!--<li class="nav-item">
               <a href="novo_chamado.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Novo Chamado</p>
               </a>
-            </li>
+            </li> -->
             <li class="nav-item">
               <a href="meus_chamados.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>

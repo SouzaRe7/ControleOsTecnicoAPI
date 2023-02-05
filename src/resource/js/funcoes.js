@@ -53,3 +53,31 @@ function LimparNotificarCamposGenerico(form_id){
         $(this).removeClass("is-valid");
     })
 }
+function CarregarAtenderChamado(id_chamado, Equipamento){
+    $("#id_chamado").val(id_chamado);
+    $("#modalEquipamento").html(Equipamento);
+}
+function CarregarEncerramentoChamado(id_chamado){
+    $("#modalIdChamado").val(id_chamado);
+    $("#Laudo").val().trim();
+}
+function FecharModal(nome_modal){
+    $("#" + nome_modal).modal("hide");
+}
+function CarregarAtenderChamado(id_chamado, Equipamento){
+    $("#id_chamado").val(id_chamado);
+    $("#modalEquipamento").html(Equipamento);
+}
+function CarregarVerMais(DtAtendimento, DtEncerramento, TecnicoAtendimento, TecnicoEncerramento, Laudo){
+    $("#modalDtAtendimento").val(DtAtendimento);
+    $("#modalDtEncerramento").val(DtEncerramento);
+    $("#modalTecnicoAtendimento").val(TecnicoAtendimento);
+    $("#modalTecnicoEncerramento").val(TecnicoEncerramento);
+    $("#modalLaudo").val(Laudo);
+    if(DtEncerramento == "null"){
+        let msg = "Não foi encerrado";
+        $("#modalDtEncerramento").val(msg);
+        $("#modalTecnicoEncerramento").val(msg);
+        $("#modalLaudo").val(msg);
+    }
+}

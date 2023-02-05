@@ -26,7 +26,7 @@ require_once dirname(__DIR__, 2) . '/vendor/autoload.php';
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Funcionário</a></li>
+                                <li class="breadcrumb-item"><a href="#">Técnico</a></li>
                                 <li class="breadcrumb-item active">Chamados</li>
                             </ol>
                         </div>
@@ -50,16 +50,19 @@ require_once dirname(__DIR__, 2) . '/vendor/autoload.php';
                         <div class="row">
                             <div class="form-group col-md-12">
                                 <label>Escolha a situação</label>
-                                <select id="fuEscolha" name="fuEscolha" class="form-control select2" style="width: 100%;">
-                                <option value="">Todos</option>
+                                <select id="situacao" name="situacao" class="form-control">
+                                <option value="<?= SITUACAO_TODOS?>">Todos</option>
+                                <option value="<?= SITUACAO_EM_ABERTO?>">Em Aberto</option>
+                                <option value="<?= SITUACAO_EM_ATENDIMENTO?>">Em Atendimento</option>
+                                <option value="<?= SITUACAO_ENCERRADO?>">Encerrado</option>
                             </select>
                             </div>
                             <div class="form-group col-md-4">
-                                <button name="btnBuscar" type="button" class="btn btn-block bg-gradient-primary">Buscar</button>
+                                <button name="btnBuscar" onclick="FiltaraChamado()" class="btn btn-block bg-gradient-primary">Buscar</button>
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body ocultar" id="divChamado">
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
@@ -68,38 +71,15 @@ require_once dirname(__DIR__, 2) . '/vendor/autoload.php';
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body table-responsive p-0">
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Ação</th>
-                                                    <th>Data abertura</th>
-                                                    <th>Funcionário</th>
-                                                    <th>Equipamento</th>
-                                                    <th>Problema</th>
-                                                    <th>Data atendimento</th>
-                                                    <th>Técnico</th>
-                                                    <th>Data encerramento</th>
-                                                    <th>Laudo</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                    <button type="button" class="btn btn-block bg-gradient-primary btn-xs">Ver mais</button>
-                                                    </td>
-                                                    <td>(data abertura)</td>
-                                                    <td>(funcionário)</td>
-                                                    <td>(equipamento)</td>
-                                                    <td>(problema)</td>
-                                                    <td>(data atendimento)</td>
-                                                    <td>(técnico)</td>
-                                                    <td>(data encerramento)</td>
-                                                    <td>(laudo)</td>
-                                                </tr>
-
-                                            </tbody>
+                                        <table class="table table-hover" id="tableResult">
+                                            
                                         </table>
                                     </div>
+                                    <?php include_once 'modal/modal_ver_mais.php'; 
+                                          include_once 'modal/modal_atender_chamado.php'; ?>
+                                    <form method="POST" action="meus_chamados.php" id="formFinalizar">
+                                        <?php include_once 'modal/modal_finalizar_chamado.php'; ?>
+                                    </form>      
                                     <!-- /.card-body -->
                                 </div>
                                 <!-- /.card -->
@@ -124,6 +104,7 @@ require_once dirname(__DIR__, 2) . '/vendor/autoload.php';
     <!-- ./wrapper -->
 
     <?php include_once PATH_URL . '/template/_includes/_script.php' ?>
+    <script src="../resource/ajax/tecnico-ajx.js"></script>
 </body>
 
 </html>
