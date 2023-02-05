@@ -127,6 +127,87 @@ function AtenderChamado(){
     return false;
 }
 
+function VerificarSenhaAtual(id_form){
+    if(NotificarCamposGenerico(id_form)){
+        //let dadosAPI = GetTnkValue();
+        //let id_user_logado = dadosAPI.id_funcionario;
+        var id_user_logado = "27";
+        let dados = {
+            endpoint: "VerificarSenhaAtualAPI",
+            id: id_user_logado,
+            senha: $("#fuSenhaAtual").val().trim()
+        }
+
+        $.ajax({
+            type: "post",
+            url: BASE_URL_AJAX("porteiro_funcionario_api"),
+            data: JSON.stringify(dados),
+            headers: {
+                //'Authorization': 'Bearer ' + GetTnk(),
+                'Content-Type': 'application/json'
+            },
+            success: function(dados_ret){
+                //alert("aqui");
+                console.log(dados_ret);
+                var resultado = dados_ret['result'];
+                if(resultado == -1){
+                    MensagemGenerica("Senha atual não confere");
+                }else if(resultado == 1){
+                    $("#divSenhaAtual").hide();
+                    $("#divSenhaNova").show();
+                    LimparCampos(id_form);
+                }else if(resultado == -1000){
+                    ClearTnk();
+                    ChamarOutraPagina("login");
+                }
+            }
+        })
+    }
+    return false;
+}
+
+function AtualizarSenha(id_form){
+    if(NotificarCamposGenerico(id_form)){
+        //let dadosAPI = GetTnkValue();
+        //let id_user_logado = dadosAPI.id_funcionario;
+        //console.log(id_user_logado);
+       var id_user_logado = "27";
+        let dados = {
+            endpoint: "AtualizarSenhaAPI",
+            id: id_user_logado,
+            senha: $("#fuSenha").val().trim(),
+            repetir_senha: $("#fuReSenha").val().trim()
+        }
+        $.ajax({
+            type: "post",
+            url: BASE_URL_AJAX("porteiro_funcionario_api"),
+            data: JSON.stringify(dados),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            success: function(dados_ret){
+                let resultado = dados_ret['result'];
+                if (resultado == -2){
+                    MensagemGenerica("A senha deverá conter no mínimo 6 caracteres");
+                } else if (resultado == -3){
+                    MensagemGenerica("O campo senha e repetir senha não conferem");
+                } else if (resultado == 1){
+                    MensagemSucesso();
+                    $("#divSenhaNova").hide();
+                    $("#divSenhaAtual").show();
+                    $("#fuSenha").val('');
+                } else if (resultado == -1){
+                    MensagemErro();
+                } else if (resultado == -1000){
+                    ClearTnk();
+                    ChamarOutraPagina("login");
+                }
+            }
+        })
+    }
+    return false;
+}
+
 function FiltaraChamado(){
     let dados = {
         endpoint: "FiltrarChamadoAPI",

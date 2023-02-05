@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Fechar</button>
+                <button style="margin-left: auto;" type="button" class="btn btn-outline-dark" data-dismiss="modal">Fechar</button>
             </div>
         </div>
         <!-- /.modal-content -->
