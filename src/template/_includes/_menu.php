@@ -10,7 +10,7 @@
 
   <!-- Sidebar -->
   <div class="sidebar">
-    <center><i class="fas fa-user" style="font-size: 100px;"></i></center>
+  <center><i class="fas fa-user" style="font-size: 100px;"></i><div id="divNomePerfil"> </div></center>
     <!-- Sidebar user (optional) -->
     <!--
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">

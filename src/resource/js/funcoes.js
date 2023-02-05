@@ -81,3 +81,26 @@ function CarregarVerMais(DtAtendimento, DtEncerramento, TecnicoAtendimento, Tecn
         $("#modalLaudo").val(msg);
     }
 }
+function AddTnk(t) {
+    localStorage.setItem('user_tkn', t);
+}
+function GetTnkValue() {
+    var token = GetTnk();
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var j = decodeURIComponent(window.atob(base64).split('').map(function (c) {
+    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(j);
+}  
+function GetTnk() {
+    if (localStorage.getItem('user_tkn') != null)
+        return localStorage.getItem('user_tkn');
+}
+function Verify() {
+    if (localStorage.getItem('user_tkn') === null)
+        location = "login.php";
+} 
+function ClearTnk() {
+    localStorage.clear();
+} 

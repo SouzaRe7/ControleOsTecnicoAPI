@@ -1,5 +1,12 @@
+function MeuPerfil(){
+    let dadosAPI = GetTnkValue();
+    let nome = '<span style="color: #007bff;">'+ dadosAPI.nome_usuario + '</span>';
+    $("#divNomePerfil").html(nome);
+}
 function CarregarMeusDados(){
-    let id_user_logado = "27";
+    let dadosAPI = GetTnkValue();
+        let id_user_logado = dadosAPI.id_tecnico;
+        //let id_user_logado = "27";
     let dados = {
         endpoint: "DetalharMeusDados",
         id_user: id_user_logado
@@ -9,6 +16,7 @@ function CarregarMeusDados(){
         url: BASE_URL_AJAX("porteiro_tecnico_api"),
         data: JSON.stringify(dados),
         headers:{
+            'Authorization': 'Bearer ' + GetTnk(),
             'Content-Type': 'application/json'
         }, success: function(dados_ret){
             //console.log(dados_ret);
@@ -30,7 +38,9 @@ function CarregarMeusDados(){
 
 function AlterarMeusDados(id_form){
     if (NotificarCamposGenerico(id_form)) {
-        let id_user_logado = "27";
+        let dadosAPI = GetTnkValue();
+        let id_user_logado = dadosAPI.id_tecnico;
+        //let id_user_logado = "27";
         //console.log($("#fuNome").val());
         let dados = {
             endpoint: "AlterarTecnico",
@@ -52,6 +62,7 @@ function AlterarMeusDados(id_form){
             url: BASE_URL_AJAX("porteiro_tecnico_api"),
             data: JSON.stringify(dados),
             headers:{
+                'Authorization': 'Bearer ' + GetTnk(),
                 'Content-Type': 'application/json'
             }, success: function(dados_ret){
                 let resultado = dados_ret['result'];
@@ -68,7 +79,9 @@ function AlterarMeusDados(id_form){
 }
 function EncerrarChamado(id_form){
     if(NotificarCamposGenerico(id_form)){
-        let id_user_logado = "27";
+        let dadosAPI = GetTnkValue();
+        let id_user_logado = dadosAPI.id_tecnico;
+        //let id_user_logado = "27";
         let dados = {
             endpoint: "EncerrarAtendimentoChamadoAPI",
             id_tecnico_encerramento: id_user_logado,
@@ -80,6 +93,7 @@ function EncerrarChamado(id_form){
             url: BASE_URL_AJAX("porteiro_tecnico_api"),
             data: JSON.stringify(dados),
             headers:{
+                'Authorization': 'Bearer ' + GetTnk(),
                 'Content-Type': 'application/json'
             }, success: function(dados_ret){
                 let resultado = dados_ret['result'];
@@ -87,7 +101,6 @@ function EncerrarChamado(id_form){
                     MensagemSucesso();
                     FiltaraChamado();
                     FecharModal("modal-finalizar");
-    
                 }else{
                     MensagemErro();
                 }
@@ -99,7 +112,9 @@ function EncerrarChamado(id_form){
 }
 
 function AtenderChamado(){
-    let id_user_logado = "27";
+    let dadosAPI = GetTnkValue();
+    let id_user_logado = dadosAPI.id_tecnico;
+    //let id_user_logado = "27";
     let dados = {
         endpoint: "AtualizarAtendimentoChamadoAPI",
         id_tecnico_atendimento: id_user_logado,
@@ -110,6 +125,7 @@ function AtenderChamado(){
         url: BASE_URL_AJAX("porteiro_tecnico_api"),
         data: JSON.stringify(dados),
         headers:{
+            'Authorization': 'Bearer ' + GetTnk(),
             'Content-Type': 'application/json'
         }, success: function(dados_ret){
             let resultado = dados_ret['result'];
@@ -121,7 +137,6 @@ function AtenderChamado(){
             }else{
                 MensagemErro();
             }
-          
         }
     });
     return false;
@@ -129,9 +144,9 @@ function AtenderChamado(){
 
 function VerificarSenhaAtual(id_form){
     if(NotificarCamposGenerico(id_form)){
-        //let dadosAPI = GetTnkValue();
-        //let id_user_logado = dadosAPI.id_funcionario;
-        var id_user_logado = "27";
+        let dadosAPI = GetTnkValue();
+        let id_user_logado = dadosAPI.id_tecnico;
+        //var id_user_logado = "27";
         let dados = {
             endpoint: "VerificarSenhaAtualAPI",
             id: id_user_logado,
@@ -140,10 +155,10 @@ function VerificarSenhaAtual(id_form){
 
         $.ajax({
             type: "post",
-            url: BASE_URL_AJAX("porteiro_funcionario_api"),
+            url: BASE_URL_AJAX("porteiro_tecnico_api"),
             data: JSON.stringify(dados),
             headers: {
-                //'Authorization': 'Bearer ' + GetTnk(),
+                'Authorization': 'Bearer ' + GetTnk(),
                 'Content-Type': 'application/json'
             },
             success: function(dados_ret){
@@ -168,10 +183,10 @@ function VerificarSenhaAtual(id_form){
 
 function AtualizarSenha(id_form){
     if(NotificarCamposGenerico(id_form)){
-        //let dadosAPI = GetTnkValue();
-        //let id_user_logado = dadosAPI.id_funcionario;
+        let dadosAPI = GetTnkValue();
+        let id_user_logado = dadosAPI.id_tecnico;
         //console.log(id_user_logado);
-       var id_user_logado = "27";
+       //var id_user_logado = "27";
         let dados = {
             endpoint: "AtualizarSenhaAPI",
             id: id_user_logado,
@@ -180,9 +195,10 @@ function AtualizarSenha(id_form){
         }
         $.ajax({
             type: "post",
-            url: BASE_URL_AJAX("porteiro_funcionario_api"),
+            url: BASE_URL_AJAX("porteiro_tecnico_api"),
             data: JSON.stringify(dados),
             headers: {
+                'Authorization': 'Bearer ' + GetTnk(),
                 'Content-Type': 'application/json'
             },
             success: function(dados_ret){
@@ -208,6 +224,36 @@ function AtualizarSenha(id_form){
     return false;
 }
 
+function ValidarAcesso(id_form){
+    if(NotificarCamposGenerico(id_form)){
+        let dados = {
+            login: $("#login").val(),
+            senha: $("#senha").val(),
+            endpoint: "AutenticarAPI"
+        }
+        $.ajax({
+            type: "post",
+            url: BASE_URL_AJAX("porteiro_tecnico_api"),
+            data: JSON.stringify(dados),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            success: function(dados_ret){
+                //console.log(dados_ret);
+                let resultado = dados_ret['result'];
+                console.log(resultado);
+                if (resultado == -3){
+                    MensagemGenerica("Usuario não autorizado");
+                }else{
+                    AddTnk(resultado);
+                    location = "meus_chamados.php";
+                }
+            }
+        })
+    }
+    return false;
+}
+
 function FiltaraChamado(){
     let dados = {
         endpoint: "FiltrarChamadoAPI",
@@ -215,7 +261,7 @@ function FiltaraChamado(){
     }
     $.ajax({
         type: "POST",
-        url: BASE_URL_AJAX("porteiro_funcionario_api"),
+        url: BASE_URL_AJAX("porteiro_tecnico_api"),
         data: JSON.stringify(dados),
         headers:{
             //'Authorization': 'Bearer ' + GetTnk(),
