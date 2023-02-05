@@ -101,6 +101,7 @@ function EncerrarChamado(id_form){
                     MensagemSucesso();
                     FiltaraChamado();
                     FecharModal("modal-finalizar");
+                    LimparCamposGenerico(id_form);
                 }else{
                     MensagemErro();
                 }
@@ -310,7 +311,7 @@ function FiltaraChamado(){
                     }else if(this.data_adendimento != null && this.data_encerramento != null){
                         table_data += '<span class="badge badge-success">Concluído</span>';
                     }
-                    table_data += '<td>';
+                    table_data += '</td>';
                     table_data += '</tr>';
                 })
                 table_end = '</tbody></table>';
