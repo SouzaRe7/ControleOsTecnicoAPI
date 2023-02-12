@@ -8,6 +8,8 @@
             </div>
             <div class="modal-body">
                 <input type="hidden" id="modalIdChamado">
+                <input type="hidden" id="alocar">
+                <label>Nome do equipamemto: </label> <span id="NomeEquipamento"></span><br>
                 <label>Laudo</label>
                 <textarea id="Laudo" class="form-control obg" maxlength="500" placeholder="Laudo da manutenção"></textarea>
             </div>

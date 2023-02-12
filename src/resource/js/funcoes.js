@@ -57,9 +57,11 @@ function CarregarAtenderChamado(id_chamado, Equipamento){
     $("#id_chamado").val(id_chamado);
     $("#modalEquipamento").html(Equipamento);
 }
-function CarregarEncerramentoChamado(id_chamado){
-    $("#modalIdChamado").val(id_chamado);
+function CarregarEncerramentoChamado(chamado_id, id_alocar, nome_equipamento){
+    $("#modalIdChamado").val(chamado_id);
+    $("#alocar").val(id_alocar);
     $("#Laudo").val().trim();
+    $("#NomeEquipamento").html(nome_equipamento)
 }
 function FecharModal(nome_modal){
     $("#" + nome_modal).modal("hide");

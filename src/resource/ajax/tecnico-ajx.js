@@ -86,8 +86,10 @@ function EncerrarChamado(id_form){
             endpoint: "EncerrarAtendimentoChamadoAPI",
             id_tecnico_encerramento: id_user_logado,
             id_chamado: $("#modalIdChamado").val(),
+            alocar_id: $("#alocar").val(),
             laudo: $("#Laudo").val().trim()
         }
+        console.log(id_user_logado);
         $.ajax({
             type: "post",
             url: BASE_URL_AJAX("porteiro_tecnico_api"),
@@ -96,6 +98,7 @@ function EncerrarChamado(id_form){
                 'Authorization': 'Bearer ' + GetTnk(),
                 'Content-Type': 'application/json'
             }, success: function(dados_ret){
+                
                 let resultado = dados_ret['result'];
                 if (resultado == '1') {
                     MensagemSucesso();
@@ -296,7 +299,7 @@ function FiltaraChamado(){
                     if(this.data_adendimento == null){
                         table_data += '<button onclick="CarregarAtenderChamado(' + this.id_chamado + ',' + "'" + this.identificacao + ' / Modelo: '  + this.nome_modelo + ' / ' + this.nome_tipo + "'" + ')" data-toggle="modal" data-target="#modal-atander" type="button" class="btn btn-block bg-gradient-warning btn-xs">Atender</button>';
                     }else if(this.data_adendimento != null && this.data_encerramento == null){
-                        table_data += '<button onclick="CarregarEncerramentoChamado(' + this.id_chamado +')" type="button" data-toggle="modal" data-target="#modal-finalizar" class="btn btn-block bg-gradient-success btn-xs">Finalizar</button>';
+                        table_data += '<button onclick="CarregarEncerramentoChamado(' + this.id_chamado +','+ this.id_alocar + ',' + "'" + this.identificacao + ' / Modelo: '  + this.nome_modelo + ' / ' + this.nome_tipo + "'" +')" type="button" data-toggle="modal" data-target="#modal-finalizar" class="btn btn-block bg-gradient-success btn-xs">Finalizar</button>';
                     }
                     table_data += '</td>';
                     table_data += '<td>' + this.nome_func + '</td>';
