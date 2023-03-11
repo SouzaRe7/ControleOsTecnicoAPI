@@ -73,6 +73,12 @@
               </a>
             </li>
           </ul>
+          <li class="nav-item">
+              <a href="#" onclick="Sair()" class="nav-link">
+                <i class="fas fa-power-off nav-icon" style="color: red;" ></i>
+                <p>Sair</p>
+              </a>
+            </li>
         </li>
       </ul>
     </nav>

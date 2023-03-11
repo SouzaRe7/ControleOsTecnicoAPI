@@ -105,4 +105,8 @@ function Verify() {
 } 
 function ClearTnk() {
     localStorage.clear();
-} 
+}
+function Sair(){
+    localStorage.clear();
+    ChamarOutraPagina("login");
+}
